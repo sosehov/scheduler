@@ -1,3 +1,5 @@
+import { HttpStatusCode } from "axios";
+
 export default {
   get: jest.fn((url) => {
     if (url === "/api/days") {
@@ -24,6 +26,17 @@ export default {
       })
     }
   }),
+
+  put: jest.fn((url, body) => {
+    if (url.startsWith("/api/appointments/")) {
+      return Promise.resolve({
+        status: 204,
+        statusCode: "No Content"
+      });
+    }
+    return Promise.reject(new Error("Unknown PUT request:" + url));
+  })
+
 };
 
 const fixtures = {
