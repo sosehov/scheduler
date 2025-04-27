@@ -35,8 +35,18 @@ export default {
       });
     }
     return Promise.reject(new Error("Unknown PUT request:" + url));
-  })
+  }),
 
+  delete: jest.fn((url) => {
+    if (url.startsWith("/api/appointments/")) {
+      return Promise.resolve({
+        status: 204,
+        statusText: "No Content"
+      });
+    }
+    return Promise.reject(new Error("Unknown DELETE request: " + url));
+  }),
+  
 };
 
 const fixtures = {
